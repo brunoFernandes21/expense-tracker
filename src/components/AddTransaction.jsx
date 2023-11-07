@@ -39,7 +39,6 @@ export const AddTransaction = () => {
   };
 
   const isNotEmpty = Boolean(formData.text) && Boolean(formData.amount)
-  console.log(isNotEmpty);
 
   return (
     <div>

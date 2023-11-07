@@ -1,16 +1,32 @@
 import { createContext, useContext, useReducer } from "react";
 import AppReducer from "./AppReducer";
-//initial state
 
+//GET TRANSACTIONS FROM LOCALSTORAGE
+const getTransactions = () => {
+    let transactionsInLocalStorage = localStorage.getItem("transactions")
+    if(transactionsInLocalStorage) {
+        transactionsInLocalStorage = JSON.parse(localStorage.getItem("transactions"))
+    } else {
+        transactionsInLocalStorage = []
+    }
+
+    return transactionsInLocalStorage
+}
+
+//initial state
 const initialState = {
-  transactions: [
-    { id: 1, text: "Camera", amount: -470 },
-    { id: 2, text: "Food Shopping", amount: -200 },
-    { id: 3, text: "Investment", amount: 200 },
-    { id: 4, text: "Car Finance", amount: -320 },
-    { id: 5, text: "Salary", amount: 650 },
-  ],
+    transactions: getTransactions()
+//   transactions: [
+//     { id: 1, text: "Camera", amount: -470 },
+//     { id: 2, text: "Food Shopping", amount: -200 },
+//     { id: 3, text: "Investment", amount: 200 },
+//     { id: 4, text: "Car Finance", amount: -320 },
+//     { id: 5, text: "Salary", amount: 650 },
+//   ],
 };
+
+
+//TODO: IMPLEMENT LOCALSTORAGE
 
 //create context
 export const GlobalContext = createContext(initialState);
@@ -25,12 +41,15 @@ export const AppProvider = ({ children }) => {
       type: "DELETE_TRANSACTION",
       payload: id,
     });
+    localStorage.setItem("transactions", JSON.stringify(state.transactions))
   };
   const addTransaction = (transaction) => {
     dispatch({
       type: "ADD_TRANSACTION",
       payload: transaction
-    });
+    })
+    const allTransactions = [transaction, ...state.transactions]
+    localStorage.setItem("transactions", JSON.stringify(allTransactions))
   };
 
   return (
