@@ -61,7 +61,7 @@ export const AddTransaction = () => {
           <label htmlFor="amount" className="font-bold">
             Amount
             <br />
-            (negative-expense, positive-income)
+            (positive -&gt; income | negative -&gt; expense)
           </label>
           <input
             type="number"
