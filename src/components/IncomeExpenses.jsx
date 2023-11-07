@@ -4,8 +4,9 @@ export const IncomeExpenses = () => {
   const { transactions } = useGlobalContext();
 
   const amounts = transactions.map(transaction => transaction.amount)
-  const totalIncome = amounts.filter(amount => amount > 0).reduce((acc, curr) => acc += curr).toFixed(2)
-  const totalExpense = (amounts.filter(amount => amount < 0).reduce((acc, curr) => acc += curr) * -1).toFixed(2)
+  const totalIncome = amounts.filter(amount => amount > 0).reduce((acc, curr) => acc += curr, 0).toFixed(2)
+  const totalExpense = (amounts.filter(amount => amount < 0).reduce((acc, curr) => acc += curr, 0) * -1).toFixed(2)
+  
   return (
     <div className="bg-white py-4 flex justify-center items-center  shadow-md divide-x-2">
       <div className="flex flex-col justify-center items-center pr-10">

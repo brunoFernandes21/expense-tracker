@@ -5,8 +5,8 @@ export const Balance = () => {
   const { transactions } = useGlobalContext();
 
   //get all the ammount and store in an array
-  const amounts = transactions.map(transaction => transaction.amount)
-  const total = amounts.reduce((acc, current) => acc +=current)
+  const amounts = transactions.map(transaction => transaction.amount);
+  const total = amounts.reduce((acc, current) => acc += current, 0)
   const sign = total < 0 ? "-" : ""
   return (
     <div>
