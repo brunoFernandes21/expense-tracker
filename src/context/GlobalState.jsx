@@ -26,8 +26,6 @@ const initialState = {
 };
 
 
-//TODO: IMPLEMENT LOCALSTORAGE
-
 //create context
 export const GlobalContext = createContext(initialState);
 
@@ -41,7 +39,8 @@ export const AppProvider = ({ children }) => {
       type: "DELETE_TRANSACTION",
       payload: id,
     });
-    localStorage.setItem("transactions", JSON.stringify(state.transactions))
+    const updatedTransactions =  state.transactions.filter(transaction => transaction.id !== id);
+    localStorage.setItem("transactions", JSON.stringify(updatedTransactions))
   };
   const addTransaction = (transaction) => {
     dispatch({
